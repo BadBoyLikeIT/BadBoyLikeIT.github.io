@@ -6,23 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Github Pages+Hexo博客搭建极简版教程 | Mr L&#39;s Blog</title>
+  <title>shadowsocketsR搭建教程 | Mr L&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近闲来无事，又突然想写点东西，忽然发现没有一个载体，于是就想折腾一个博客。这种博客的搭建教程网上有很多，但是大多比较啰嗦，于是就想搞一个简化版的教程，只把核心的命令与步骤记录了下来，思路清晰、简单易行就好。">
-<meta name="keywords" content="hexo">
+  <meta name="description" content="首先，本教程声明不建议大家将酸酸乳用于任何GOV不允许的领域。作为一个IT狗，许多资料以及技术都是国外网站的，现在中国的搜索引擎搜出的东西越来越糟糕了，超级怀念google的日子，加之GF喜欢看youtube，无奈只能想办法…">
+<meta name="keywords" content="vpn">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Github Pages+Hexo博客搭建极简版教程">
-<meta property="og:url" content="http://yoursite.com/2018/01/05/github-hexo-blog/index.html">
+<meta property="og:title" content="shadowsocketsR搭建教程">
+<meta property="og:url" content="http://yoursite.com/2018/01/19/setUpSSR2/index.html">
 <meta property="og:site_name" content="Mr L&#39;s Blog">
-<meta property="og:description" content="最近闲来无事，又突然想写点东西，忽然发现没有一个载体，于是就想折腾一个博客。这种博客的搭建教程网上有很多，但是大多比较啰嗦，于是就想搞一个简化版的教程，只把核心的命令与步骤记录了下来，思路清晰、简单易行就好。">
+<meta property="og:description" content="首先，本教程声明不建议大家将酸酸乳用于任何GOV不允许的领域。作为一个IT狗，许多资料以及技术都是国外网站的，现在中国的搜索引擎搜出的东西越来越糟糕了，超级怀念google的日子，加之GF喜欢看youtube，无奈只能想办法…">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://maple.nos-eastchina1.126.net/20180105174720.png">
-<meta property="og:image" content="https://maple.nos-eastchina1.126.net/20180105174929.png">
-<meta property="og:updated_time" content="2019-05-31T06:59:14.133Z">
+<meta property="og:image" content="https://maple.nos-eastchina1.126.net/vultr20180119155446.png">
+<meta property="og:image" content="https://maple.nos-eastchina1.126.net/%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B71.png">
+<meta property="og:image" content="https://maple.nos-eastchina1.126.net/%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B72.png">
+<meta property="og:image" content="https://maple.nos-eastchina1.126.net/%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B73.png">
+<meta property="og:image" content="https://maple.nos-eastchina1.126.net/%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE.png">
+<meta property="og:image" content="https://maple.nos-eastchina1.126.net/%E6%B5%8B%E8%AF%95%E8%8A%82%E7%82%B9%E6%8A%A5%E5%91%8A.png">
+<meta property="og:updated_time" content="2018-11-20T09:43:10.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Github Pages+Hexo博客搭建极简版教程">
-<meta name="twitter:description" content="最近闲来无事，又突然想写点东西，忽然发现没有一个载体，于是就想折腾一个博客。这种博客的搭建教程网上有很多，但是大多比较啰嗦，于是就想搞一个简化版的教程，只把核心的命令与步骤记录了下来，思路清晰、简单易行就好。">
-<meta name="twitter:image" content="https://maple.nos-eastchina1.126.net/20180105174720.png">
+<meta name="twitter:title" content="shadowsocketsR搭建教程">
+<meta name="twitter:description" content="首先，本教程声明不建议大家将酸酸乳用于任何GOV不允许的领域。作为一个IT狗，许多资料以及技术都是国外网站的，现在中国的搜索引擎搜出的东西越来越糟糕了，超级怀念google的日子，加之GF喜欢看youtube，无奈只能想办法…">
+<meta name="twitter:image" content="https://maple.nos-eastchina1.126.net/vultr20180119155446.png">
   
     <link rel="alternative" href="/atom.xml" title="Mr L&#39;s Blog" type="application/atom+xml">
   
@@ -166,65 +170,51 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-github-hexo-blog" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-setUpSSR2" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Github Pages+Hexo博客搭建极简版教程
+      shadowsocketsR搭建教程
     </h1>
   
 
         
-        <a href="/2018/01/05/github-hexo-blog/" class="archive-article-date">
-  	<time datetime="2018-01-05T10:22:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-05</time>
+        <a href="/2018/01/19/setUpSSR2/" class="archive-article-date">
+  	<time datetime="2018-01-19T07:36:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>最近闲来无事，又突然想写点东西，忽然发现没有一个载体，于是就想折腾一个博客。<br>这种博客的搭建教程网上有很多，但是大多比较啰嗦，于是就想搞一个简化版的教程，<br>只把核心的命令与步骤记录了下来，思路清晰、简单易行就好。</p>
+        <p>首先，本教程声明不建议大家将酸酸乳用于任何GOV不允许的领域。<br>作为一个IT狗，许多资料以及技术都是国外网站的，现在中国的搜索引擎搜出的东西越来越糟糕了，超级怀念google的日子，加之GF喜欢看youtube，无奈只能想办法…</p>
 <a id="more"></a>
+<h1 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h1><h2 id="1-租用VPS"><a href="#1-租用VPS" class="headerlink" title="1.租用VPS"></a>1.租用VPS</h2><p>所谓VPS也就是虚拟主机服务，说白了就是租用一台服务器。VPN相当于是一个虚拟链接通道，那么通道的这一头是你，另一头需要一个境外的节点。<br>VPS平台有很多，下面是两个综合评价还可以的VPS平台，仅供参考。<br><a href="https://www.vultr.com/" target="_blank" rel="noopener">vultr</a><br><a href="https://bandwagonhost.com/" target="_blank" rel="noopener">搬瓦工</a><br>因为vultr有日本节点Ping的延迟较小，大概135ms，加之可以ailipay所以我就选择了vultr的vps。以下是我的主机的配置，当然可以根据个人的喜好来设置。<br><img src="https://maple.nos-eastchina1.126.net/vultr20180119155446.png" alt="主机配置-vultr20180119155446"></p>
+<h2 id="2-搭建酸酸乳"><a href="#2-搭建酸酸乳" class="headerlink" title="2.搭建酸酸乳"></a>2.搭建酸酸乳</h2><p>本文选择的是ssr一键安装脚本，所以全程省心。</p>
+<h3 id="2-1登录VPS"><a href="#2-1登录VPS" class="headerlink" title="2.1登录VPS"></a>2.1登录VPS</h3><p>利用ssh登录到之前购买的VPS主机上。登录IP与Password可以在之前的Server informatiom中查看</p>
+<h3 id="2-2安装酸酸乳"><a href="#2-2安装酸酸乳" class="headerlink" title="2.2安装酸酸乳"></a>2.2安装酸酸乳</h3><p>本文所采用的是一键安装脚本，省心省力。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate https://raw.githubusercontent.com/wbdy95/SSR-Bash-Python/master/install.sh &amp;&amp; bash install.sh</span><br></pre></td></tr></table></figure>
 
-<h2 id="1-环境安装"><a href="#1-环境安装" class="headerlink" title="1.环境安装"></a>1.环境安装</h2><h3 id="1-1安装nodejs与git"><a href="#1-1安装nodejs与git" class="headerlink" title="1.1安装nodejs与git"></a>1.1安装nodejs与git</h3><p><a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">nodejs下载地址</a><br><a href="https://git-scm.com/downloads" target="_blank" rel="noopener">git下载地址</a></p>
-<h3 id="1-2检查是否安装成功"><a href="#1-2检查是否安装成功" class="headerlink" title="1.2检查是否安装成功"></a>1.2检查是否安装成功</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br><span class="line">git --version</span><br></pre></td></tr></table></figure>
-
+<h2 id="3-安装酸酸乳客户端"><a href="#3-安装酸酸乳客户端" class="headerlink" title="3.安装酸酸乳客户端"></a>3.安装酸酸乳客户端</h2><p>有了vpn的出口端，现在回来搭建vpn的入口端，入口端很简单，只要下载对应平台的客户端即可。</p>
 <blockquote>
-<p><code>Note:</code>安装成功每一条命令都应该输出版本信息</p>
+<p><a href="https://github.com/shadowsocksr-backup/shadowsocksr-csharp/releases/download/4.7.0/ShadowsocksR-4.7.0-win.7z" target="_blank" rel="noopener">windows客户端</a><br><a href="https://softs.fun/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/PC/Shadowsocks/Linux/Shadowsocks-qt5/Shadowsocks-Qt5-x86_64-v3.0.0.AppImage" target="_blank" rel="noopener">linux客户端</a><br><a href="https://softs.fun/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/PC/Shadowsocks/Mac/ShadowsocksX-R/ShadowsocksX-R-v1.3.9.zip" target="_blank" rel="noopener">mac客户端</a><br><a href="https://softs.fun/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/Android/ShadowsocksR/ShadowsocksR-v3.4.0.6.apk" target="_blank" rel="noopener">android客户端</a><br><code>iphone客户端</code>比较麻烦一些，建议使用<code>shadowrocket</code>这个客户端，这个软件APP Store是付费的，可以选择<code>爱思助手</code>选择应用搜索下载安装到iphone即可。</p>
 </blockquote>
-<p><img src="https://maple.nos-eastchina1.126.net/20180105174720.png" alt="检测-20180105174720"></p>
-<h2 id="2-安装hexo"><a href="#2-安装hexo" class="headerlink" title="2.安装hexo"></a>2.安装hexo</h2><h3 id="2-1安装命令"><a href="#2-1安装命令" class="headerlink" title="2.1安装命令"></a>2.1安装命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-2hexo初始化"><a href="#2-2hexo初始化" class="headerlink" title="2.2hexo初始化"></a>2.2hexo初始化</h3><p>新建一个文件夹，之后再该文件夹下，打开<code>cmd</code>,输入一下命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br><span class="line">npm install</span><br><span class="line">hexo s -g</span><br></pre></td></tr></table></figure>
-
-<p>此时可以在本地浏览器中输入：localhost:4000如果配置成功可以看到hexo的欢迎界面</p>
+<h2 id="4-配置酸酸乳用户"><a href="#4-配置酸酸乳用户" class="headerlink" title="4.配置酸酸乳用户"></a>4.配置酸酸乳用户</h2><h3 id="4-1VPS添加用户"><a href="#4-1VPS添加用户" class="headerlink" title="4.1VPS添加用户"></a>4.1VPS添加用户</h3><p>远程连接VPS，连接成功后输入ssr，即可操作。操作过程如下图所示：<br><img src="https://maple.nos-eastchina1.126.net/%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B71.png" alt="添加用户1"></p>
+<p>在配置以下的<code>加密方式</code> <code>协议方式</code> <code>混淆方式</code>可以任意选择：<br><img src="https://maple.nos-eastchina1.126.net/%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B72.png" alt="添加用户2"></p>
+<h3 id="4-2配置成功后的用户信息"><a href="#4-2配置成功后的用户信息" class="headerlink" title="4.2配置成功后的用户信息"></a>4.2配置成功后的用户信息</h3><p><img src="https://maple.nos-eastchina1.126.net/%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B73.png" alt="用户信息-添加用户3"></p>
 <blockquote>
-<ul>
-<li>如果在安装过程中发生异常，可以卸载nodejs以及删除npm,需要把<code>appdata\Roaming</code>下的npm与npmcache删掉。</li>
-<li>如果多次卸载删除可能导致文件权限异常，可以利用<code>chkdsk c: /f</code> 修复一下C:磁盘即可。</li>
-</ul>
+<p><code>Note:</code>如<code>协议方式</code>选择<code>origin</code>且<code>混淆模式</code>选择<code>plain</code>,配置成功后的用户信息也可以用于<code>shadowsockets</code>客户端</p>
 </blockquote>
-<h2 id="3-更换hexo主题"><a href="#3-更换hexo主题" class="headerlink" title="3.更换hexo主题"></a>3.更换hexo主题</h2><p>可以选择各种好看的主题，本文以比较流行的<code>yilia</code>主题为例，输入如下命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">git clone https://github.com/litten/hexo-theme-yilia.git themes/yilia</span><br></pre></td></tr></table></figure>
+<h3 id="4-3填入客户端"><a href="#4-3填入客户端" class="headerlink" title="4.3填入客户端"></a>4.3填入客户端</h3><p>根据配置成功的用户信息，将信息对应填入酸酸乳的客户端中。<br><img src="https://maple.nos-eastchina1.126.net/%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE.png" alt="配置客户端"><br>iphone端的<code>shadowrocket</code>配置有些特殊，可以参考<a href="https://www.hinwen.com/3662.html" target="_blank" rel="noopener">iphone端的配置教程</a><br>配置成功之后，你已经可以使用google了。不过，就是有点卡…</p>
+<h2 id="5-安装BBR"><a href="#5-安装BBR" class="headerlink" title="5.安装BBR"></a>5.安装BBR</h2><p>BBR是Google开源了的一种拥塞控制算法，简单的讲就是可以一款安装了之后可以让你的VPN网速起飞的软件。<br>一键脚本化安装：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh &amp;&amp; chmod +x bbr.sh &amp;&amp; ./bbr.sh</span><br></pre></td></tr></table></figure>
 
-<p>此时已经将<code>yilia</code>主题下载到<code>themes</code>目录下了，修改根目录下（之前初始化的文件夹）的<code>_config.yml</code>文件，将其中的<code>theme</code>改为<code>yilia</code><br><img src="https://maple.nos-eastchina1.126.net/20180105174929.png" alt="主题修改-20180105174929"><br>修改完成保存后可以使用下面的命令部署,之后可以在本地<code>localhost:4000</code>来查看主题效果</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s -g</span><br></pre></td></tr></table></figure>
+<p>详细教程可参考<a href="https://teddysun.com/489.html" target="_blank" rel="noopener">BBR一键安装教程</a></p>
+<p>至此，你已经可以畅游google咯，如果对shadowsocketsR客户端使用有什么疑问可以参考<a href="https://doub.io/ss-jc10/" target="_blank" rel="noopener">shadowsocketsR使用教程</a>。以下附一张本地的测试截图：<br><img src="https://maple.nos-eastchina1.126.net/%E6%B5%8B%E8%AF%95%E8%8A%82%E7%82%B9%E6%8A%A5%E5%91%8A.png" alt="speedtest-测试节点报告"></p>
 
-<h2 id="4-github上创建仓库"><a href="#4-github上创建仓库" class="headerlink" title="4.github上创建仓库"></a>4.github上创建仓库</h2><blockquote>
-<p><code>Note:</code> 仓库的名称需要符合 <code>git@github.com:username/username.github.io.git</code> 这种命名规范，否则无法正确解析URL。</p>
-</blockquote>
-<h2 id="5-配置Deployment"><a href="#5-配置Deployment" class="headerlink" title="5.配置Deployment"></a>5.配置Deployment</h2><h3 id="5-1首先配置本地的git的user-name与user-email，配置命令如下："><a href="#5-1首先配置本地的git的user-name与user-email，配置命令如下：" class="headerlink" title="5.1首先配置本地的git的user.name与user.email，配置命令如下："></a>5.1首先配置本地的git的<code>user.name</code>与<code>user.email</code>，配置命令如下：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;输入你的用户名&quot;</span><br><span class="line">git config --global user.email &quot;输入你的邮箱&quot;</span><br></pre></td></tr></table></figure>
-
-<h3 id="5-2修改-config-yml文件中的deploy部分，内容可以参考上图。"><a href="#5-2修改-config-yml文件中的deploy部分，内容可以参考上图。" class="headerlink" title="5.2修改_config.yml文件中的deploy部分，内容可以参考上图。"></a>5.2修改<code>_config.yml</code>文件中的<code>deploy</code>部分，内容可以参考上图。</h3><h3 id="5-3安装插件"><a href="#5-3安装插件" class="headerlink" title="5.3安装插件"></a>5.3安装插件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<h3 id="5-4部署上传"><a href="#5-4部署上传" class="headerlink" title="5.4部署上传"></a>5.4部署上传</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
-
-<h2 id="6-设置github-pages"><a href="#6-设置github-pages" class="headerlink" title="6.设置github pages"></a>6.设置github pages</h2><p>登入<code>github</code>，进入之前创建的<code>username.github.io</code>的仓库，在<code>setting</code>中找到<code>github pages</code>在<code>source</code>下选择<code>master branch</code>点击<code>save</code>即可。此时<code>username.github.io</code>这个URL将可以被解析，博客就可以完成远程访问。</p>
-<h3 id="至此github-pages-hexo博客搭建就已经成功了！"><a href="#至此github-pages-hexo博客搭建就已经成功了！" class="headerlink" title="至此github pages + hexo博客搭建就已经成功了！"></a>至此github pages + hexo博客搭建就已经成功了！</h3>
       
 
       
@@ -258,7 +248,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vpn</a>
         		</li>
       		
 		</ul>
@@ -314,7 +304,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/01/05/github-hexo-blog/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/01/19/setUpSSR2/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -328,7 +318,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/01/19/setUpSSR2/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/01/19/setUpSSR/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -338,8 +328,8 @@
     </a>
   
   
-    <a href="/2017/12/29/postgraduate-exam/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">考研往事</div>
+    <a href="/2018/01/05/github-hexo-blog/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Github Pages+Hexo博客搭建极简版教程</div>
       <i class="icon-circle-right"></i>
     </a>
   
