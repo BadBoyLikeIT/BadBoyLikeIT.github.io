@@ -163,11 +163,24 @@
     <article id="post-dataStr_tree_and_graph" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/03/dataStr_tree_and_graph/">数据结构-树与图</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/03/dataStr_tree_and_graph/" class="archive-article-date">
+  	<time datetime="2019-11-03T15:12:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-03</time>
+</a>
+        
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <hr>
-<p>title:数据结构-树与图<br>date:2019-11-03 23:12:22</p>
-<h2 id="tags-code-数据结构"><a href="#tags-code-数据结构" class="headerlink" title="tags:[code,数据结构]"></a>tags:[code,数据结构]</h2><p>数据结构中树与图的常用算法实现</p>
+        <p>数据结构中树与图的常用算法实现</p>
         
           <a class="article-more-a" href="/2019/11/03/dataStr_tree_and_graph/#more">more >></a>
         
@@ -178,6 +191,21 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -215,19 +243,27 @@
     <article id="post-dataStr_stack_and_queue" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/03/dataStr_stack_and_queue/">数据结构-栈与队列</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/03/dataStr_stack_and_queue/" class="archive-article-date">
+  	<time datetime="2019-11-03T14:31:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-03</time>
+</a>
+        
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <hr>
-<p>title:数据结构-栈与队列<br>date:2019-11-3 22:31:22</p>
-<h2 id="tags-code-数据结构"><a href="#tags-code-数据结构" class="headerlink" title="tags:[code,数据结构]"></a>tags:[code,数据结构]</h2><h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><p><code>栈</code>：只允许在一端进行插入或删除操作的线性表。通过只操作<code>top</code>从而实现<code>先进后出</code>的特点。</p>
-<h3 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#define MaxSize 50                 //定义栈中元素的最大个数</span><br><span class="line">typedef struct&#123;</span><br><span class="line">    Elemtype data[MaxSize];        //存放栈中元素</span><br><span class="line">    int top;                       //栈顶指针</span><br><span class="line">&#125;SqStack;</span><br></pre></td></tr></table></figure>
-
-<h3 id="源码实现："><a href="#源码实现：" class="headerlink" title="源码实现："></a>源码实现：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#define MaxSize 50   //定义栈中元素的最大个数</span><br><span class="line">using namespace std;</span><br><span class="line">class MyStack</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">private:</span><br><span class="line">    int data[MaxSize];</span><br><span class="line">public:</span><br><span class="line">    int top;</span><br><span class="line">    MyStack()&#123;</span><br><span class="line">        top = -1;</span><br><span class="line">    &#125;;</span><br><span class="line">    ~MyStack()&#123;&#125;;</span><br><span class="line"></span><br><span class="line">    bool IsEmpty()&#123;</span><br><span class="line">        if(top == -1)</span><br><span class="line">            return true;</span><br><span class="line">        else</span><br><span class="line">            return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    bool Mpush (int x)&#123;</span><br><span class="line">        if(top == MaxSize-1)</span><br><span class="line">            return false;</span><br><span class="line">        data[++top] = x;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    bool Mpop()&#123;</span><br><span class="line">        if(top == -1)</span><br><span class="line">            return false;</span><br><span class="line">        top--;  //靠覆盖实现数据的删除</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    bool GetTop(int &amp;x)&#123;</span><br><span class="line">        if(top == -1)</span><br><span class="line">            return false;</span><br><span class="line">        x = data[top];</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    MyStack mStack;  //构造函数会在实例化的时候自动调用</span><br><span class="line">    for(int i=1; i&lt;6; i++)</span><br><span class="line">        mStack.Mpush(i);</span><br><span class="line">    mStack.Mpop();</span><br><span class="line">    int mtop;</span><br><span class="line">    mStack.GetTop(mtop);</span><br><span class="line">    cout&lt;&lt;mtop&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;mStack.top&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><p><code>队列</code>:只允许在表的一端进行插入，而在表的另一端进行删除操作的线性表。通过操作<code>front</code>与<code>rear</code>两个元素，从而实现<code>先进先出</code>的特点。</p>
-<h3 id="结构体-1"><a href="#结构体-1" class="headerlink" title="结构体"></a>结构体</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#define MaxSize 50                        //定义队列中元素的最大个数</span><br><span class="line">typedef struct&#123;</span><br><span class="line">    Elemtype data[MaxSize];               //存放队列元素</span><br><span class="line">    int front,rear;                       //队头指针和队尾指针</span><br><span class="line">&#125;SqQueue;</span><br></pre></td></tr></table></figure>
-
-<h3 id="源码实现：-1"><a href="#源码实现：-1" class="headerlink" title="源码实现："></a>源码实现：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">#define MaxSize 50   //定义栈中元素的最大个数</span><br><span class="line">class MyQueue</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">private:</span><br><span class="line">    int data[MaxSize];</span><br><span class="line">public:</span><br><span class="line">    int front;</span><br><span class="line">    int rear;</span><br><span class="line">    MyQueue()&#123;</span><br><span class="line">        front=rear=0;</span><br><span class="line">    &#125;;</span><br><span class="line">    ~MyQueue()&#123;&#125;;</span><br><span class="line"></span><br><span class="line">    bool IsEmpty()&#123;</span><br><span class="line">        if(front == rear)</span><br><span class="line">            return true;</span><br><span class="line">        else</span><br><span class="line">            return false;</span><br><span class="line">    &#125;</span><br><span class="line">    bool IsFull()&#123;</span><br><span class="line">        //防止队空与队满均出现rear == front所以rear指向下一个位置</span><br><span class="line">        if((rear+1)%MaxSize == front)</span><br><span class="line">            return true;</span><br><span class="line">        else</span><br><span class="line">            return false;</span><br><span class="line">    &#125;</span><br><span class="line">    bool EnQueue (int x)&#123;</span><br><span class="line">        if(!IsFull())</span><br><span class="line">        &#123;</span><br><span class="line">            data[rear] = x;</span><br><span class="line">            rear = (rear+1)%MaxSize;   //操作队尾</span><br><span class="line">            return true;</span><br><span class="line">        &#125;else</span><br><span class="line">            return false;</span><br><span class="line">    &#125;</span><br><span class="line">    bool Dequeue(int &amp;x)&#123;</span><br><span class="line">        if(IsEmpty())</span><br><span class="line">            return false;</span><br><span class="line">        else&#123;</span><br><span class="line">            x = data[front];</span><br><span class="line">            front = (front+1)%MaxSize;  //操作队头</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    MyQueue myQueue;</span><br><span class="line">    for(int i=0;i&lt;5;i++)</span><br><span class="line">        myQueue.EnQueue(i);</span><br><span class="line">    int x,i=0;</span><br><span class="line">    while(i++&lt;3)</span><br><span class="line">        myQueue.Dequeue(x);</span><br><span class="line">    cout&lt;&lt;x&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>数据结构中栈与队列的源码实现</p>
+        
+          <a class="article-more-a" href="/2019/11/03/dataStr_stack_and_queue/#more">more >></a>
+        
       
 
       
@@ -235,6 +271,21 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
