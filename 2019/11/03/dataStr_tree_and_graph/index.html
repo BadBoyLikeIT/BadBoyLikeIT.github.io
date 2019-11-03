@@ -8,13 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Mr L&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="title:数据结构-树与图date:2019-11-03 23:12:22 tags:[code,数据结构]数据结构中树与图的常用算法实现">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Mr L&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/11/03/dataStr_tree_and_graph/index.html">
 <meta property="og:site_name" content="Mr L&#39;s Blog">
+<meta property="og:description" content="title:数据结构-树与图date:2019-11-03 23:12:22 tags:[code,数据结构]数据结构中树与图的常用算法实现">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-11-03T15:31:31.696Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mr L&#39;s Blog">
+<meta name="twitter:description" content="title:数据结构-树与图date:2019-11-03 23:12:22 tags:[code,数据结构]数据结构中树与图的常用算法实现">
   
     <link rel="alternative" href="/atom.xml" title="Mr L&#39;s Blog" type="application/atom+xml">
   
@@ -158,9 +162,7 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-dataStr_tree_and_graph" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-dataStr_tree_and_graph" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
     <div class="article-entry" itemprop="articleBody">
@@ -168,11 +170,53 @@
         <hr>
 <p>title:数据结构-树与图<br>date:2019-11-03 23:12:22</p>
 <h2 id="tags-code-数据结构"><a href="#tags-code-数据结构" class="headerlink" title="tags:[code,数据结构]"></a>tags:[code,数据结构]</h2><p>数据结构中树与图的常用算法实现</p>
-        
-          <a class="article-more-a" href="/2019/11/03/dataStr_tree_and_graph/#more">more >></a>
-        
+<a id="more"></a>
+<h2 id="树"><a href="#树" class="headerlink" title="树"></a>树</h2><p><code>树</code>：是N(N&gt;=0)个结点的有限集合。任意一颗非空树应满足：</p>
+<blockquote>
+<ul>
+<li>有且仅有一个特定的称为<code>根</code>的结点</li>
+<li>当N&gt;1时，其余结点可分为m(m&gt;0)个互不相交的有限集合T1，T2，…,Tm,其中每一个集合本身又是一颗树，并且称为根结点的<code>子树</code></li>
+</ul>
+</blockquote>
+<p>树适合表示具有层次结构的数据。</p>
+<h3 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">typedef struct Tree&#123;</span><br><span class="line">    int data;</span><br><span class="line">    Tree *left,*right;</span><br><span class="line">    Tree(int x):data(x),left(NULL),right(NULL)&#123;&#125;</span><br><span class="line">&#125;TreeNode,*pTreeNode;</span><br></pre></td></tr></table></figure>
+
+<h3 id="树的遍历"><a href="#树的遍历" class="headerlink" title="树的遍历"></a>树的遍历</h3><p>树中最重要的算法就是树的遍历，分为<code>前中后</code>序三种遍历方法，本文分别用递归和非递归的方式实现了以上三种遍历方法以及树的层次遍历。</p>
+<h3 id="源码实现"><a href="#源码实现" class="headerlink" title="源码实现"></a>源码实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;stack&gt;</span><br><span class="line">#include &lt;queue&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">//树的结构体</span><br><span class="line">typedef struct Tree&#123;</span><br><span class="line">    int data;</span><br><span class="line">    Tree *left,*right;</span><br><span class="line">    Tree(int x):data(x),left(NULL),right(NULL)&#123;&#125;</span><br><span class="line">&#125;TreeNode,*pTreeNode;</span><br><span class="line"></span><br><span class="line">int res[6]=&#123;0&#125;,i=0;  //res辅助读取树的内容</span><br><span class="line">//初始化一颗树</span><br><span class="line">/*1</span><br><span class="line">  |-2</span><br><span class="line">  | |-4</span><br><span class="line">  | |-5</span><br><span class="line">  |</span><br><span class="line">  |-3</span><br><span class="line">  | |-NULL</span><br><span class="line">  | |-7</span><br><span class="line">*/</span><br><span class="line">Tree * InitOneTree()</span><br><span class="line">&#123;</span><br><span class="line">    pTreeNode pTree7 = new Tree(7);</span><br><span class="line">    pTreeNode pTree5 = new Tree(5);</span><br><span class="line">    pTreeNode pTree4 = new Tree(4);</span><br><span class="line">    pTreeNode pTree3 = new Tree(3);</span><br><span class="line">    pTreeNode pTree2 = new Tree(2);</span><br><span class="line">    pTreeNode pTree1 = new Tree(1);</span><br><span class="line">    pTree1-&gt;left = pTree2;</span><br><span class="line">    pTree1-&gt;right = pTree3;</span><br><span class="line">    pTree2-&gt;left = pTree4;</span><br><span class="line">    pTree2-&gt;right = pTree5;</span><br><span class="line">    pTree3-&gt;right = pTree7;</span><br><span class="line">    return pTree1;</span><br><span class="line">&#125;</span><br><span class="line">//存储结果</span><br><span class="line">void visit(pTreeNode root)&#123;</span><br><span class="line">    res[i++] = root-&gt;data;</span><br><span class="line">&#125;</span><br><span class="line">//递归 前序遍历</span><br><span class="line">void PreOrder(pTreeNode root)</span><br><span class="line">&#123;</span><br><span class="line">    if(root)</span><br><span class="line">    &#123;</span><br><span class="line">       visit(root);</span><br><span class="line">       PreOrder(root-&gt;left);</span><br><span class="line">       PreOrder(root-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//递归 中序遍历</span><br><span class="line">void InOrder(pTreeNode root)</span><br><span class="line">&#123;</span><br><span class="line">    if(root)</span><br><span class="line">    &#123;</span><br><span class="line">        InOrder(root-&gt;left);</span><br><span class="line">        visit(root);</span><br><span class="line">        InOrder(root-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//递归 后序遍历</span><br><span class="line">void PostOrder(pTreeNode root)</span><br><span class="line">&#123;</span><br><span class="line">    if(root)</span><br><span class="line">    &#123;</span><br><span class="line">        PostOrder(root-&gt;left);</span><br><span class="line">        PostOrder(root-&gt;right);</span><br><span class="line">        visit(root);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//非递归 前序遍历</span><br><span class="line">void PreOrder2(pTreeNode root)</span><br><span class="line">&#123;</span><br><span class="line">    pTreeNode pTmp = root;</span><br><span class="line">    stack&lt;pTreeNode&gt;mStack;</span><br><span class="line">    mStack.push(pTmp);</span><br><span class="line">    while(!mStack.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        pTmp = mStack.top();</span><br><span class="line">        mStack.pop();</span><br><span class="line">        visit(pTmp);</span><br><span class="line">        if(pTmp-&gt;right)</span><br><span class="line">            mStack.push(pTmp-&gt;right);</span><br><span class="line">        if(pTmp-&gt;left)</span><br><span class="line">            mStack.push(pTmp-&gt;left);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//非递归 中序遍历</span><br><span class="line">void InOrder2(pTreeNode root)</span><br><span class="line">&#123;</span><br><span class="line">    stack&lt;pTreeNode&gt;mStack;</span><br><span class="line">    pTreeNode pTmp = root;</span><br><span class="line">    while(pTmp||!mStack.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        if(pTmp)</span><br><span class="line">        &#123;</span><br><span class="line">            mStack.push(pTmp);</span><br><span class="line">            pTmp = pTmp-&gt;left;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            pTmp = mStack.top();</span><br><span class="line">            mStack.pop();</span><br><span class="line">            visit(pTmp);</span><br><span class="line">            pTmp = pTmp-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//非递归 后序遍历</span><br><span class="line">//前序遍历 根-&gt;左-&gt;右 变成 根-&gt;右-&gt;左 结果再reverse</span><br><span class="line">void PostOrder2(pTreeNode root)</span><br><span class="line">&#123;</span><br><span class="line">    pTreeNode pTmp = root;</span><br><span class="line">    stack&lt;pTreeNode&gt;mStack;</span><br><span class="line">    mStack.push(pTmp);</span><br><span class="line">    while(!mStack.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        pTmp = mStack.top();</span><br><span class="line">        mStack.pop();</span><br><span class="line">        visit(pTmp);</span><br><span class="line">        if(pTmp-&gt;left)</span><br><span class="line">            mStack.push(pTmp-&gt;left);</span><br><span class="line">        if(pTmp-&gt;right)</span><br><span class="line">            mStack.push(pTmp-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line">    //结果reverse</span><br><span class="line">    for(int i=0; i&lt;5; i++)  //6个数需要搬5趟</span><br><span class="line">    &#123;</span><br><span class="line">        //先将最后的一个数放到当前第一个位置上</span><br><span class="line">        int tmp = res[i];</span><br><span class="line">        res[i] = res[5];</span><br><span class="line">        //从后面开始赋值</span><br><span class="line">        for(int j=5-1;j&gt;i;j--)</span><br><span class="line">            res[j+1] = res[j];</span><br><span class="line">        res[i+1] = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//非递归 层次遍历 即广度优先</span><br><span class="line">void LevelOrder(pTreeNode root)</span><br><span class="line">&#123;</span><br><span class="line">    queue&lt;pTreeNode&gt;mQueue;</span><br><span class="line">    mQueue.push(root);</span><br><span class="line">    while(!mQueue.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        pTreeNode pTmp = mQueue.front();</span><br><span class="line">        mQueue.pop();</span><br><span class="line">        visit(pTmp);</span><br><span class="line">        if(pTmp-&gt;left)</span><br><span class="line">            mQueue.push(pTmp-&gt;left);</span><br><span class="line">        if(pTmp-&gt;right)</span><br><span class="line">            mQueue.push(pTmp-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    pTreeNode pTree = InitOneTree();</span><br><span class="line">    i=0;</span><br><span class="line">    //PreOrder(pTree);</span><br><span class="line">    //InOrder(pTree);</span><br><span class="line">    //PostOrder(pTree);</span><br><span class="line">    //PreOrder2(pTree);</span><br><span class="line">    //InOrder2(pTree);</span><br><span class="line">    //PostOrder2(pTree);</span><br><span class="line">    LevelOrder(pTree);</span><br><span class="line"></span><br><span class="line">    for(int j=0;j&lt;6;j++)</span><br><span class="line">        cout&lt;&lt;res[j]&lt;&lt;&quot; &quot;;</span><br><span class="line">    cout&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="图"><a href="#图" class="headerlink" title="图"></a>图</h2><p><code>图G</code>:由顶点集V和边集E组成，记为G=(V,E),其中V(G)表示图G中顶点的有限非空集；E(G)表示图G中顶点之间的关系(边)集合。<br>因为图的构造比较复杂，所以主要理解原理即可。</p>
+<h3 id="重点掌握内容"><a href="#重点掌握内容" class="headerlink" title="重点掌握内容"></a>重点掌握内容</h3><blockquote>
+<ul>
+<li>图的概念</li>
+<li>图的存储(图的表示)<br>  邻接矩阵法(二维数组)、邻接表(数组+链表)、十字链表(不要求)、邻接多重表(不要求)<br>  邻接矩阵会比较浪费空间，而邻接表则可以克服这个问题</li>
+<li>图的遍历<br>  广度优先搜索(BFS-借助队列)、深度优先搜索(DFS-类似于树的前序遍历、递归)</li>
+<li>图的应用(算法的应用-考点)<br>  <code>最小生成树</code>：1.普利姆(Prim)算法 从已有集合中选取最小未到达顶点的边；2.克鲁斯卡尔(Kruskal)算法 一直选取最小边<br>  <code>最短路径</code>：单源最短路径-迪杰斯特拉(Dijkstra)算法  类似Prim算法 每趟得到一个最短路径<br>  <code>拓扑排序</code>：AOV网中得到一个拓扑排序，意义：确定<code>事件先后顺序</code>的算法<br>  <code>关键路径</code>：AOE网中得到一个关键路径，意义：确定<code>并行事件中的关键活动</code>的算法</li>
+</ul>
+</blockquote>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -181,16 +225,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/03/dataStr_tree_and_graph/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/11/03/dataStr_tree_and_graph/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/11/03/dataStr_stack_and_queue/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -210,705 +313,14 @@
 
 
 
-
-  
-    <article id="post-dataStr_stack_and_queue" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>title:数据结构-栈与队列<br>date:2019-11-3 22:31:22</p>
-<h2 id="tags-code-数据结构"><a href="#tags-code-数据结构" class="headerlink" title="tags:[code,数据结构]"></a>tags:[code,数据结构]</h2><h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><p><code>栈</code>：只允许在一端进行插入或删除操作的线性表。通过只操作<code>top</code>从而实现<code>先进后出</code>的特点。</p>
-<h3 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#define MaxSize 50                 //定义栈中元素的最大个数</span><br><span class="line">typedef struct&#123;</span><br><span class="line">    Elemtype data[MaxSize];        //存放栈中元素</span><br><span class="line">    int top;                       //栈顶指针</span><br><span class="line">&#125;SqStack;</span><br></pre></td></tr></table></figure>
-
-<h3 id="源码实现："><a href="#源码实现：" class="headerlink" title="源码实现："></a>源码实现：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#define MaxSize 50   //定义栈中元素的最大个数</span><br><span class="line">using namespace std;</span><br><span class="line">class MyStack</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">private:</span><br><span class="line">    int data[MaxSize];</span><br><span class="line">public:</span><br><span class="line">    int top;</span><br><span class="line">    MyStack()&#123;</span><br><span class="line">        top = -1;</span><br><span class="line">    &#125;;</span><br><span class="line">    ~MyStack()&#123;&#125;;</span><br><span class="line"></span><br><span class="line">    bool IsEmpty()&#123;</span><br><span class="line">        if(top == -1)</span><br><span class="line">            return true;</span><br><span class="line">        else</span><br><span class="line">            return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    bool Mpush (int x)&#123;</span><br><span class="line">        if(top == MaxSize-1)</span><br><span class="line">            return false;</span><br><span class="line">        data[++top] = x;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    bool Mpop()&#123;</span><br><span class="line">        if(top == -1)</span><br><span class="line">            return false;</span><br><span class="line">        top--;  //靠覆盖实现数据的删除</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    bool GetTop(int &amp;x)&#123;</span><br><span class="line">        if(top == -1)</span><br><span class="line">            return false;</span><br><span class="line">        x = data[top];</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    MyStack mStack;  //构造函数会在实例化的时候自动调用</span><br><span class="line">    for(int i=1; i&lt;6; i++)</span><br><span class="line">        mStack.Mpush(i);</span><br><span class="line">    mStack.Mpop();</span><br><span class="line">    int mtop;</span><br><span class="line">    mStack.GetTop(mtop);</span><br><span class="line">    cout&lt;&lt;mtop&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;mStack.top&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><p><code>队列</code>:只允许在表的一端进行插入，而在表的另一端进行删除操作的线性表。通过操作<code>front</code>与<code>rear</code>两个元素，从而实现<code>先进先出</code>的特点。</p>
-<h3 id="结构体-1"><a href="#结构体-1" class="headerlink" title="结构体"></a>结构体</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#define MaxSize 50                        //定义队列中元素的最大个数</span><br><span class="line">typedef struct&#123;</span><br><span class="line">    Elemtype data[MaxSize];               //存放队列元素</span><br><span class="line">    int front,rear;                       //队头指针和队尾指针</span><br><span class="line">&#125;SqQueue;</span><br></pre></td></tr></table></figure>
-
-<h3 id="源码实现：-1"><a href="#源码实现：-1" class="headerlink" title="源码实现："></a>源码实现：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">#define MaxSize 50   //定义栈中元素的最大个数</span><br><span class="line">class MyQueue</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">private:</span><br><span class="line">    int data[MaxSize];</span><br><span class="line">public:</span><br><span class="line">    int front;</span><br><span class="line">    int rear;</span><br><span class="line">    MyQueue()&#123;</span><br><span class="line">        front=rear=0;</span><br><span class="line">    &#125;;</span><br><span class="line">    ~MyQueue()&#123;&#125;;</span><br><span class="line"></span><br><span class="line">    bool IsEmpty()&#123;</span><br><span class="line">        if(front == rear)</span><br><span class="line">            return true;</span><br><span class="line">        else</span><br><span class="line">            return false;</span><br><span class="line">    &#125;</span><br><span class="line">    bool IsFull()&#123;</span><br><span class="line">        //防止队空与队满均出现rear == front所以rear指向下一个位置</span><br><span class="line">        if((rear+1)%MaxSize == front)</span><br><span class="line">            return true;</span><br><span class="line">        else</span><br><span class="line">            return false;</span><br><span class="line">    &#125;</span><br><span class="line">    bool EnQueue (int x)&#123;</span><br><span class="line">        if(!IsFull())</span><br><span class="line">        &#123;</span><br><span class="line">            data[rear] = x;</span><br><span class="line">            rear = (rear+1)%MaxSize;   //操作队尾</span><br><span class="line">            return true;</span><br><span class="line">        &#125;else</span><br><span class="line">            return false;</span><br><span class="line">    &#125;</span><br><span class="line">    bool Dequeue(int &amp;x)&#123;</span><br><span class="line">        if(IsEmpty())</span><br><span class="line">            return false;</span><br><span class="line">        else&#123;</span><br><span class="line">            x = data[front];</span><br><span class="line">            front = (front+1)%MaxSize;  //操作队头</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    MyQueue myQueue;</span><br><span class="line">    for(int i=0;i&lt;5;i++)</span><br><span class="line">        myQueue.EnQueue(i);</span><br><span class="line">    int x,i=0;</span><br><span class="line">    while(i++&lt;3)</span><br><span class="line">        myQueue.Dequeue(x);</span><br><span class="line">    cout&lt;&lt;x&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/03/dataStr_stack_and_queue/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-create_us_appleID" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/09/create_us_appleID/">IOS12 注册美国区Apple ID</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/09/create_us_appleID/" class="archive-article-date">
-  	<time datetime="2019-05-09T11:51:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>首先，本教程声明不建议大家将外区ID用于任何GOV不允许的领域。<br>作为一个IT狗，一些优秀的软件需要外区下载，加之周围的朋友想玩PUBG MOBILE，所以想想办法申请美区的Apple ID…</p>
-        
-          <a class="article-more-a" href="/2019/05/09/create_us_appleID/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">AppleID</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/09/create_us_appleID/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-lua5-3GC_automatically_trigger_understanding" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/27/lua5-3GC_automatically_trigger_understanding/">Lua5.3版自动GC触发条件理解</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/27/lua5-3GC_automatically_trigger_understanding/" class="archive-article-date">
-  	<time datetime="2018-12-27T08:36:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在我的上一篇文章《Lua5.3版GC机制的学习理解》的4.2部分GC触发条件中，对这部分内容粗略的解释为：LuaGC是当lua使用的内存到达阀值时，自动触发。那么这篇文章将对这句描述，进行进一步的理解，并探讨一些GC参数的调节问题。</p>
-        
-          <a class="article-more-a" href="/2018/12/27/lua5-3GC_automatically_trigger_understanding/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Lua</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">GC</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/27/lua5-3GC_automatically_trigger_understanding/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-lua5-3GC_mechanism_understanding" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/26/lua5-3GC_mechanism_understanding/">Lua5.3版GC机制的学习理解</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/26/lua5-3GC_mechanism_understanding/" class="archive-article-date">
-  	<time datetime="2018-12-26T08:57:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>lua垃圾回收(Garbage Collect)是lua中一个比较重要的部分。由于lua源码版本变迁，目前大多数有关这个方面的文章都还是基于lua5.1版本，有一定的滞后性。因此本文通过参考当前的5.3.4版本的Lua源码，希望对Lua的GC算法有一个较为详尽的探讨。</p>
-        
-          <a class="article-more-a" href="/2018/12/26/lua5-3GC_mechanism_understanding/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Lua</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">GC</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/26/lua5-3GC_mechanism_understanding/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-c++_memory_alloc" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/09/c++_memory_alloc/">系统学习-C++内存分配</a>
-    </h1>
-  
-
-        
-        <a href="/2018/08/09/c++_memory_alloc/" class="archive-article-date">
-  	<time datetime="2018-08-09T07:10:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>C++内存分配是一个很基础的问题，明白这个分配机制，有很多C++的问题都可以很容易理解。比如const成员变量为何需要利用构造函数初始化列表才能进行初始化；static关键字为什么可以改变存储属性；new/malloc的内存分配方式等。</p>
-        
-          <a class="article-more-a" href="/2018/08/09/c++_memory_alloc/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/09/c++_memory_alloc/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-coroutine_study" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/16/coroutine_study/">系统学习-协程理解</a>
-    </h1>
-  
-
-        
-        <a href="/2018/07/16/coroutine_study/" class="archive-article-date">
-  	<time datetime="2018-07-16T08:48:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在面对异步IO频繁的业务需求的时，可以使用回调的机制。在利用回调的过程中，如果利用状态机则会发生回调金字塔（callback hell),主要表现为:1.代码复用率极低。2.逻辑复杂。此时利用协同程序可以很好的解决这个问题。</p>
-        
-          <a class="article-more-a" href="/2018/07/16/coroutine_study/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">系统学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/07/16/coroutine_study/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-dataStr_linklist" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/11/dataStr_linklist/">数据结构-单链表与双链表</a>
-    </h1>
-  
-
-        
-        <a href="/2018/06/11/dataStr_linklist/" class="archive-article-date">
-  	<time datetime="2018-06-11T09:03:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>单链表与双链表的常规操作</p>
-        
-          <a class="article-more-a" href="/2018/06/11/dataStr_linklist/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/06/11/dataStr_linklist/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-dataStr_find" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/21/dataStr_find/">数据结构-查找算法</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/21/dataStr_find/" class="archive-article-date">
-  	<time datetime="2018-05-21T09:03:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>随手记录查找算法</p>
-        
-          <a class="article-more-a" href="/2018/05/21/dataStr_find/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/21/dataStr_find/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-dataStr_sort_summry" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/07/dataStr_sort_summry/">数据结构-八大排序算法</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/07/dataStr_sort_summry/" class="archive-article-date">
-  	<time datetime="2018-05-07T09:03:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近在面试过程中，发现很多公司还是很注重基础的，对于基本的排序要求掌握的比较扎实，能够任意写出各种排序，对各种排序性能进行比较，那就随手总结一下吧。</p>
-        
-          <a class="article-more-a" href="/2018/05/07/dataStr_sort_summry/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/07/dataStr_sort_summry/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -931,8 +343,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
